@@ -2,13 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const [currentTime, setCurrentTime] = useState('');
+  const pathname = usePathname();
+
+  // Get active section from the current path
+  const getActiveSection = (path) => {
+    if (path === '/') return 'home';
+    return path.slice(1); // Remove the leading slash
+  };
 
   const navItems = [
     { name: 'Home', href: '/', cmd: 'cd ~' },
@@ -26,14 +33,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      
-      const sections = document.querySelectorAll('section[id]');
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          setActiveSection(section.id);
-        }
-      });
     };
 
     const updateTime = () => {
@@ -51,8 +50,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleLinkClick = (sectionName) => {
-    setActiveSection(sectionName);
+  const handleLinkClick = () => {
     setIsOpen(false);
   };
 
@@ -78,7 +76,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center text-sm">
               <span className="text-purple-400">user@portfolio</span>
               <span className="text-white">:</span>
-              <span className="text-blue-400">~/{activeSection}</span>
+              <span className="text-blue-400">~/{getActiveSection(pathname)}</span>
               <span className="text-white">$</span>
             </div>
 
@@ -88,9 +86,9 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  onClick={() => handleLinkClick(item.name.toLowerCase())}
+                  onClick={handleLinkClick}
                   className={`group relative py-2 text-sm transition-colors ${
-                    activeSection === item.name.toLowerCase()
+                    pathname === item.href
                       ? 'text-green-400'
                       : 'text-gray-400 hover:text-green-400'
                   }`}
@@ -134,10 +132,9 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        {/* style={{ height: isOpen ? '100vh' : '4rem' }} */}
         <div
           style={{ height: isOpen ? '100vh' : '1rem' }}
-          className={`md:hidden border-t border-green-500/30 transition-all duration-300 ease-in-out  ${
+          className={`md:hidden border-t border-green-500/30 transition-all duration-300 ease-in-out ${
             isOpen
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 -translate-y-4 pointer-events-none'
@@ -148,9 +145,9 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={() => handleLinkClick(item.name.toLowerCase())}
+                onClick={handleLinkClick}
                 className={`block px-4 py-3 text-sm border-b border-green-500/10 transition-colors ${
-                  activeSection === item.name.toLowerCase()
+                  pathname === item.href
                     ? 'bg-green-500/10 text-green-400'
                     : 'text-gray-400 hover:bg-green-500/5 hover:text-green-400'
                 }`}

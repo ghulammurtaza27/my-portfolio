@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Github, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Footer from '../../components/Footer';
 
 export default function About() {
   const [currentCommand, setCurrentCommand] = useState('');
@@ -12,52 +13,74 @@ export default function About() {
 
   const experiences = [
     {
-      company: "BARFI",
-      position: "Co-Founder and CTO",
-      period: "May 2023 to Sept. 2024",
-      location: "Toronto, ON",
-      highlights: [
-        "Co-founded Barfi, building an e-commerce solution for the South Asian market in North America",
-        "Developed platform using React, Next.js, and Node.js with SSR and client-side caching",
-        "Automated AWS infrastructure using Terraform and Spinnaker CI/CD pipelines",
-        "Achieved $150K ARR and 4.9/5 customer satisfaction score",
-        "Optimized supply chain using predictive algorithms and third-party API integrations"
-      ],
-      stack: "AWS (EC2, S3, RDS) / Spinnaker / Terraform / Docker / Node.js / Express / Next.js / React / PostgreSQL"
+        company: "SNACKMAGIC",
+        position: "AI Solutions Engineer",
+        period: "Mar 2025 - Present",
+        location: "Remote",
+        highlights: [
+            "Implemented AI-powered automation tools across sales and customer success, driving process efficiency and data-driven decision making.",
+            "Built AI agents to transcribe and analyze Gong sales calls, generate feedback summaries, and distribute insights via Slack integrations.",
+            "Designed lead scoring system leveraging historical conversion data and segmentation to prioritize high-value sales opportunities.",
+            "Developed dynamic sales analytics dashboards combining HubSpot, Gong, and internal data sources.",
+            "Integrated multiple AI models (Gemini, OpenAI GPT-40, LLMs) into internal workflows.",
+            "Implemented event-driven data pipelines for real-time syncing of sales and call data into analytics warehouse.",
+            "Built microservices leveraging Supabase, n8n, and serverless functions for rapid deployment of AI-powered features.",
+            "Led internal AI discovery sprints to scope and validate new automation opportunities."
+        ],
+        stack: "AI, Node.js, Supabase, n8n, HubSpot, Gong, LLMs, Slack, Snowflake, BigQuery, Postgres"
     },
     {
-      company: "MANUFACTOR INC.",
-      position: "Co-Founder and CTO",
-      period: "Oct. 2021 to May 2023",
-      location: "Montreal, QC",
-      highlights: [
-        "Developed cloud-native B2B platform connecting North American apparel brands with Asian manufacturers",
-        "Built microservices with Docker and Kubernetes supporting 20+ clients and $500,000+ in transactions",
-        "Improved performance by 30% using Redis caching and CloudFront CDN",
-        "Secured 10+ partnerships driving 150% monthly revenue growth"
-      ],
-      stack: "AWS / Docker / Kubernetes / Redis / PostgreSQL / React / Node.js / Express / WebSockets"
+        company: "BARFI GROCERY INC.",
+        position: "Co-Founder, CTO",
+        period: "Oct 2023 - Dec 2024",
+        location: "Toronto, ON",
+        highlights: [
+            "Led technical development and product strategy for a 5,000+ SKU e-commerce platform.",
+            "Designed and deployed a streamlined checkout flow that reduced cart abandonment and increased successful purchases by 25%.",
+            "Collaborated closely with marketing, customer support, and operations teams to translate customer insights into product improvements.",
+            "Advised on vendor negotiations and B2B partnership discussions, providing technical validation and solution scoping.",
+            "Led customer experience optimization projects, ensuring seamless performance across web and mobile devices.",
+            "Interfaced regularly with non-technical stakeholders to present technical roadmaps and revenue impact analysis."
+        ],
+        stack: "React / Next.js / TypeScript / MongoDB / AWS"
     },
     {
-      company: "MOROCCANOIL CANADA INC.",
-      position: "Full Stack Web Developer",
-      period: "July 2021 to Oct. 2022",
-      location: "Montreal, QC",
-      highlights: [
-        "Led end-to-end feature development and technical architecture",
-        "Designed scalable MySQL databases with automated backup protocols",
-        "Implemented event-driven architecture using Kafka",
-        "Built robust integrations using PHP and Laravel APIs"
-      ],
-      stack: "PHP / Laravel / MySQL / Kafka / Redis / AWS / Terraform"
+        company: "MANUFACTOR INC.",
+        position: "Co-Founder | Head of Technical Sales & Customer Solutions",
+        period: "Oct 2022 - Oct 2023",
+        location: "Toronto, ON",
+        highlights: [
+            "Owned full sales flow from outbound prospecting, lead qualification, technical discovery, demos, to contract negotiation and deal closing.",
+            "Delivered live product demos and technical presentations to C-level stakeholders.",
+            "Negotiated pricing, contract terms, and onboarding timelines, directly contributing to over $500K in closed revenue.",
+            "Built scalable onboarding and customer success processes, reducing time-to-value by 65%.",
+            "Acted as a bridge between customers and product engineering, ensuring rapid resolution of client-specific challenges."
+        ],
+        stack: "Sales, Customer Success, Product Demos, Revenue Growth"
+    },
+    {
+        company: "MOROCCANOIL CANADA INC.",
+        position: "Software Engineer",
+        period: "Jul 2021 - Oct 2022",
+        location: "Montreal, QC",
+        highlights: [
+            "Led the development of auto-scaling components within Laravel applications hosted on AWS.",
+            "Streamlined deployment processes using GitHub and AWS tools.",
+            "Built responsive user interfaces using Laravel Blade and modern front-end technologies.",
+            "Developed REST APIs that enabled seamless data exchange between applications.",
+            "Established robust security measures by integrating AWS security tools with Laravel."
+        ],
+        stack: "PHP / Laravel / MySQL / AWS / GitHub / AWS RDS"
     }
-  ];
+];
+
 
   const skills = {
-    languages: "JavaScript, HTML5, CSS3, Sass, Ruby, SQL, MATLAB, VBA, PHP",
-    frameworks: "Node.js, Express, React, Next.js, Laravel, Tailwind, Rails, jQuery",
-    cloud: "AWS, Docker, Kubernetes, Terraform, Spinnaker, Git, GitHub Actions",
-    databases: "PostgreSQL, MongoDB, MySQL, Redis"
+    languages: "JavaScript, TypeScript, Python, Java, HTML5, CSS3, PHP",
+    frameworks: "React, Node.js, Express, Next.js, Django, Laravel",
+    databases: "PostgreSQL, MongoDB, MySQL",
+    tools: "Git, Docker, AWS, Jest, Cypress",
+    methodologies: "Agile/Scrum, CI/CD, Test-Driven Development"
   };
 
   useEffect(() => {
@@ -84,8 +107,7 @@ export default function About() {
           <div className="mb-6 md:mb-8 animate-fadeIn">
             <div className="text-green-400 mb-2 text-sm md:text-base">[PROFILE]</div>
             <p className="text-green-300 pl-2 md:pl-4 text-sm md:text-base">
-              Proactive full-stack developer with expertise in delivering high-quality business outcomes and solutions. 
-              Proficient in modern project management frameworks, microservices, event-driven systems, and cloud services.
+              Technical founder and full stack developer with 5+ years of experience building SaaS, e-commerce, and enterprise platforms. Proven success driving revenue growth through technical solution design, customer onboarding, sales consulting, and product demos. Experienced in translating complex technical products into clear business value for diverse stakeholders. Strong cross-functional communicator with deep hands-on engineering expertise.
             </p>
           </div>
         );
@@ -125,6 +147,20 @@ export default function About() {
                 </div>
               </div>
             ))}
+          </div>
+        );
+      case 'education':
+        return (
+          <div className="mb-6 md:mb-8 animate-fadeIn">
+            <div className="text-green-400 mb-2 text-sm md:text-base">[EDUCATION]</div>
+            <div className="pl-2 md:pl-4 mb-4 text-sm md:text-base">
+              <span className="text-purple-400">McGill University</span> <span className="text-green-300">| Bachelor of Engineering (Mechanical) | Sep 2014 - Dec 2019</span>
+              <div className="text-gray-400 ml-4">- Hugh Brock Scholarship Award</div>
+            </div>
+            <div className="pl-2 md:pl-4 text-sm md:text-base">
+              <span className="text-purple-400">Lighthouse Labs</span> <span className="text-green-300">| Web Development Bootcamp | Jan 2021 - Mar 2021</span>
+              <div className="text-gray-400 ml-4">- Completed a 12-week intensive program.</div>
+            </div>
           </div>
         );
     }
@@ -211,6 +247,7 @@ export default function About() {
                 {renderSection('profile')}
                 {renderSection('skills')}
                 {renderSection('experience')}
+                {renderSection('education')}
 
                 {/* Contact Section */}
                 <div className="mt-6 md:mt-8 text-center">
@@ -239,6 +276,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      <Footer />
 
       <style jsx global>{`
         @keyframes fadeIn {

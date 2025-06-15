@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, ExternalLink, Phone, Code2, ServerCrash, Cloud, Wrench, Terminal } from 'lucide-react';
 import Hero from "../components/Hero"
 import About from "../components/About";
 import Contact from "../components/Contact"
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -18,7 +19,8 @@ export default function Home() {
   // Available commands array for suggestions
   const availableCommands = ['help', 'about', 'contact', 'clear', 'social'];
 
-  const skills = [
+  // Memoize skills array
+  const skills = useMemo(() => [
     { 
       category: "Frontend",
       Icon: Code2,
@@ -39,18 +41,20 @@ export default function Home() {
       Icon: Wrench,
       items: ["Git", "Cypress", "Storybook", "Jest", "GitHub Actions"]
     }
-  ];
+  ], []);
 
-  const socialLinks = [
+  // Memoize socialLinks array
+  const socialLinks = useMemo(() => [
     { icon: Github, href: "https://github.com/ghulammurtaza27", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com/in/gm27", label: "LinkedIn" },
     { icon: Mail, href: "mailto:murtazash123@gmail.com", label: "Email" },
     { icon: Phone, href: "tel:+16479633530", label: "Phone" }
-  ];
+  ], []);
 
-  // Filter suggestions based on current input
-  const filteredSuggestions = availableCommands.filter(cmd => 
-    cmd.startsWith(command.toLowerCase().trim())
+  // Memoize filtered suggestions
+  const filteredSuggestions = useMemo(() => 
+    availableCommands.filter(cmd => cmd.startsWith(command.toLowerCase().trim())),
+    [command]
   );
 
   const executeCommand = (cmd) => {
@@ -89,46 +93,74 @@ export default function Home() {
     setShowSuggestions(false);
   };
 
-  const handleCommand = (e) => {
+  // Memoize event handlers
+  const handleCommand = useCallback((e) => {
     e.preventDefault();
     if (command.trim()) {
       executeCommand(command);
     }
-  };
+  }, [command]);
 
-  const handleSuggestionClick = (suggestion) => {
+  const handleSuggestionClick = useCallback((suggestion) => {
     executeCommand(suggestion);
-  };
+  }, []);
 
   useEffect(() => {
     setMounted(true);
+    
+    // Debounce scroll handler
+    let timeoutId;
     const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-
-      const sections = ['hero', 'about', 'skills', 'contact'];
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (currentSection) {
-        setActiveSection(currentSection);
+      if (timeoutId) {
+        window.cancelAnimationFrame(timeoutId);
       }
+      
+      timeoutId = window.requestAnimationFrame(() => {
+        const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const currentProgress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(currentProgress);
+
+        const sections = ['hero', 'about', 'skills', 'contact'];
+        const currentSection = sections.find(section => {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top <= 100 && rect.bottom >= 100;
+          }
+          return false;
+        });
+        
+        if (currentSection) {
+          setActiveSection(currentSection);
+        }
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) {
+        window.cancelAnimationFrame(timeoutId);
+      }
+    };
   }, []);
+
+  // Replace the array generation with a memoized version
+  const binaryElements = useMemo(() => 
+    Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      value: Math.random() > 0.5 ? '1' : '0'
+    })),
+    []
+  );
 
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono relative">
+    <div className={`min-h-screen bg-black text-green-500 font-mono relative ${!mounted ? 'invisible' : ''}`}>
       {/* Terminal toggle button */}
       <button
         onClick={() => setTerminalOpen(!terminalOpen)}
@@ -213,20 +245,21 @@ export default function Home() {
       </div>
 
       <div className="fixed inset-0 z-0">
-        {[...Array(50)].map((_, i) => (
+        {binaryElements.map(({ id, top, left, delay, value }) => (
           <div
-            key={i}
+            key={id}
             className="absolute text-green-500/20 animate-twinkle select-none pointer-events-none"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
+              top,
+              left,
+              animationDelay: delay,
             }}
           >
-            {Math.random() > 0.5 ? '1' : '0'}
+            {value}
           </div>
         ))}
       </div>
+      <Footer />
 
       <style jsx global>{`
         @keyframes twinkle {

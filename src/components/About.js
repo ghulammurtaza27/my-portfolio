@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Code2, ServerCrash, Cloud, Wrench, Terminal, Activity, GitBranch, Database } from 'lucide-react';
+import { Code2, ServerCrash, Cloud, Wrench, Terminal, Activity, GitBranch, Database, Bug, Code } from 'lucide-react';
 
 const ResponsiveTechAbout = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,24 +30,29 @@ const ResponsiveTechAbout = () => {
 
   const skills = [
     {
-      category: 'Frontend Development',
-      Icon: Code2,
-      items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux', 'HTML5/CSS3']
+        category: 'Languages',
+        Icon: Code2,
+        items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'HTML5', 'CSS3', 'PHP']
     },
     {
-      category: 'Backend Development',
-      Icon: ServerCrash,
-      items: ['Node.js', 'Express', 'Python', 'Django', 'RESTful APIs', 'GraphQL']
+        category: 'Frameworks',
+        Icon: ServerCrash,
+        items: ['React', 'Node.js', 'Express', 'Next.js', 'Django', 'Laravel']
     },
     {
-      category: 'DevOps & Cloud',
-      Icon: Cloud,
-      items: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Linux', 'Git']
+        category: 'Databases',
+        Icon: Database,
+        items: ['PostgreSQL', 'MongoDB', 'MySQL']
     },
     {
-      category: 'Database & Tools',
-      Icon: Database,
-      items: ['MongoDB', 'PostgreSQL', 'Redis', 'MySQL', 'Firebase', 'Prisma']
+        category: 'Tools',
+        Icon: Cloud,
+        items: ['Git', 'Docker', 'AWS', 'Jest', 'Cypress']
+    },
+    {
+        category: 'Methodologies',
+        Icon: Bug,
+        items: ['Agile/Scrum', 'CI/CD', 'Test-Driven Development']
     }
   ];
 
@@ -55,79 +60,72 @@ const ResponsiveTechAbout = () => {
     { id: 'profile', label: 'Profile', icon: Terminal },
     { id: 'experience', label: 'Experience', icon: Activity },
     { id: 'skills', label: 'Skills', icon: Code2 },
-    { id: 'projects', label: 'Projects', icon: GitBranch }
+    { id: 'projects', label: 'Projects', icon: GitBranch },
+    { id: 'education', label: 'Education', icon: Wrench }
   ];
 
   const terminalContent = {
     profile: [
       '> cat profile.md',
-      '# Full Stack Developer',
-      'Proactive developer with expertise in delivering high-quality business outcomes',
-      'and solutions within stringent timelines.',
-      '',
-      '## Core Values',
-      '- Microservices architecture expertise',
-      '- Cloud infrastructure specialist',
-      '- Performance optimization focused',
-      '- Agile methodology practitioner'
+      '# Ghulam Murtaza',
+      'Technical founder and full stack developer with 5+ years of experience building SaaS, e-commerce, and enterprise platforms. Proven success driving revenue growth through technical solution design, customer onboarding, sales consulting, and product demos. Experienced in translating complex technical products into clear business value for diverse stakeholders. Strong cross-functional communicator with deep hands-on engineering expertise.'
     ],
     experience: [
       '> git log --oneline',
-      '* Co-Founded Barfi (2023-2024)',
-      '  - Built e-commerce platform with $150K ARR',
-      '  - Implemented microservices with AWS infrastructure',
-      '  - Achieved 20% increase in user retention',
+      '* SnackMagic | AI Solutions Engineer | Mar 2025 - Present',
+      '  - Implemented AI-powered automation tools across sales and customer success, driving process efficiency and data-driven decision making.',
+      '  - Built AI agents to transcribe and analyze Gong sales calls, generate feedback summaries, and distribute insights via Slack integrations.',
+      '  - Designed lead scoring system leveraging historical conversion data and segmentation to prioritize high-value sales opportunities.',
+      '  - Developed dynamic sales analytics dashboards combining HubSpot, Gong, and internal data sources.',
+      '  - Integrated multiple AI models (Gemini, OpenAI GPT-40, LLMs) into internal workflows.',
+      '  - Implemented event-driven data pipelines for real-time syncing of sales and call data into analytics warehouse.',
+      '  - Built microservices leveraging Supabase, n8n, and serverless functions for rapid deployment of AI-powered features.',
+      '  - Led internal AI discovery sprints to scope and validate new automation opportunities.',
       '',
-      '* Led Manufactor Inc (2021-2023)',
-      '  - Developed B2B platform for apparel brands',
-      '  - Processed $500,000+ in transactions',
-      '  - Improved performance by 30% using Redis',
+      '* Barfi Grocery Inc. | Co-Founder, CTO | Oct 2023 - Dec 2024',
+      '  - Led technical development and product strategy for a 5,000+ SKU e-commerce platform.',
+      '  - Designed and deployed a streamlined checkout flow that reduced cart abandonment and increased successful purchases by 25%.',
+      '  - Collaborated closely with marketing, customer support, and operations teams to translate customer insights into product improvements.',
+      '  - Advised on vendor negotiations and B2B partnership discussions, providing technical validation and solution scoping.',
+      '  - Led customer experience optimization projects, ensuring seamless performance across web and mobile devices.',
+      '  - Interfaced regularly with non-technical stakeholders to present technical roadmaps and revenue impact analysis.',
       '',
-      '* Developed at Moroccanoil (2021-2022)',
-      '  - Implemented event-driven architecture',
-      '  - Managed scalable MySQL databases',
-      '  - Led migration to microservices'
+      '* Manufactor Inc. | Co-Founder | Oct 2022 - Oct 2023',
+      '  - Owned full sales flow from outbound prospecting, lead qualification, technical discovery, demos, to contract negotiation and deal closing.',
+      '  - Delivered live product demos and technical presentations to C-level stakeholders.',
+      '  - Negotiated pricing, contract terms, and onboarding timelines, directly contributing to over $500K in closed revenue.',
+      '  - Built scalable onboarding and customer success processes, reducing time-to-value by 65%.',
+      '  - Acted as a bridge between customers and product engineering, ensuring rapid resolution of client-specific challenges.',
+      '',
+      '* Moroccanoil Canada Inc. | Software Engineer | Jul 2021 - Oct 2022',
+      '  - Led the development of auto-scaling components within Laravel applications hosted on AWS.',
+      '  - Streamlined deployment processes using GitHub and AWS tools.',
+      '  - Built responsive user interfaces using Laravel Blade and modern front-end technologies.',
+      '  - Developed REST APIs that enabled seamless data exchange between applications.',
+      '  - Established robust security measures by integrating AWS security tools with Laravel.'
     ],
     skills: [
       '> tree skills/',
       'skills/',
-      '├── frontend/',
-      '│   ├── React.js',
-      '│   ├── Next.js',
-      '│   ├── Laravel',
-      '│   └── Tailwind',
-      '│',
-      '├── backend/',
-      '│   ├── Node.js',
-      '│   ├── Express',
-      '│   ├── PHP',
-      '│   └── WebSockets',
-      '│',
-      '├── cloud/',
-      '│   ├── AWS (EC2, S3, RDS)',
-      '│   ├── Docker',
-      '│   ├── Kubernetes',
-      '│   └── Terraform',
-      '│',
-      '└── databases/',
-      '    ├── PostgreSQL',
-      '    ├── MongoDB',
-      '    ├── MySQL',
-      '    └── Redis'
+      '├── Languages: JavaScript, TypeScript, Python, Java, HTML5, CSS3, PHP',
+      '├── Frameworks: React, Node.js, Express, Next.js, Django, Laravel',
+      '├── Databases: PostgreSQL, MongoDB, MySQL',
+      '├── Tools: Git, Docker, AWS, Jest, Cypress',
+      '└── Methodologies: Agile/Scrum, CI/CD, Test-Driven Development'
     ],
     projects: [
-      '> docker ps',
-      'CONTAINER ID        IMAGE               STATUS',
-      'repoqa001          ai-code-qa          Up 2024',
-      'iliad002           aws-guide           Up 2024',
-      'wetv003            social-tv           Up 2021',
-      '',
       '> ls -l /projects',
-      'total 4',
-      'drwxr-xr-x  REPOQA    AI-powered GitHub repo Q&A',
-      'drwxr-xr-x  ILIAD     AWS setup guidance extension',
-      'drwxr-xr-x  WE.TV     Social media for TV fans',
-      'drwxr-xr-x  VEND      E-commerce platform'
+      'drwxr-xr-x  BUY CANADIAN   Next.js, PostgreSQL, PRISMA, Google Gemini API',
+      '  - Launched a platform for letting users scan or search grocery products driving 5,000 hits in week one post President Trump\'s Canadian Tariffs',
+      'drwxr-xr-x  CV BUILDER     React, Node.js, Google Gemini API, Tailwind CSS',
+      '  - Created AI-driven CV generator, slashing average creation time by 50% and boosting user satisfaction scores.'
+    ],
+    education: [
+      '> cat education.md',
+      'McGill University | Bachelor of Engineering (Mechanical) | Sep 2014 - Dec 2019',
+      '  - Hugh Brock Scholarship Award',
+      'Lighthouse Labs | Web Development Bootcamp | Jan 2021 - Mar 2021',
+      '  - Completed a 12-week intensive program.'
     ]
   };
 

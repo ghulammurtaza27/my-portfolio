@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useForm, ValidationError } from '@formspree/react';
+import Footer from '../../components/Footer';
 
 export default function Contact() {
   const [currentCommand, setCurrentCommand] = useState('');
@@ -153,6 +154,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <Footer />
 
       <style jsx global>{`
         @keyframes fadeIn {

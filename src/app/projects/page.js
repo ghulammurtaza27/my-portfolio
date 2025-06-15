@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github } from 'lucide-react';
+import { Github, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Footer from '../../components/Footer';
 
 const Projects = () => {
   const [currentCommand, setCurrentCommand] = useState('');
@@ -12,22 +13,16 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "REPOQA",
-      description: "A web application that enables users to upload GitHub repositories and ask questions about the code using AI. It integrates with AWS services for secure file storage and utilizes AI models to provide intelligent answers to code-related queries.",
-      tags: ["AI", "React", "Tailwind CSS", "Node.js", "Express", "AWS"],
-      githubUrl: "https://github.com/yourusername/repoqa",
+      title: "BUY CANADIAN",
+      description: "Launched a platform for letting users scan or search grocery products driving 5,000 hits in week one post President Trump's Canadian Tariffs.",
+      tags: ["Next.js", "PostgreSQL", "PRISMA", "Google Gemini API"],
+      githubUrl: "",
     },
     {
-      title: "ILIAD",
-      description: "A Chrome extension that provides interactive, step-by-step guidance for setting up any service on AWS, ensuring a smooth and easy setup process. Built using HTML, CSS, JavaScript, and the Chrome Extensions API.",
-      tags: ["Chrome Extension", "JavaScript", "AWS", "HTML", "CSS"],
-      githubUrl: "https://github.com/yourusername/iliad",
-    },
-    {
-      title: "WE.TV",
-      description: "A social media app for TV fans to share content around their favourite TV shows. Users can interact through live chats and discussions. Built with React, Axios, Material-UI for the frontend, PostgreSQL for the database, and Node.js + Express with Socket.io for real-time communication.",
-      tags: ["React", "Node.js", "PostgreSQL", "Express", "Socket.io", "Material-UI"],
-      githubUrl: "https://github.com/yourusername/wetv",
+      title: "CV BUILDER",
+      description: "Created AI-driven CV generator, slashing average creation time by 50% and boosting user satisfaction scores.",
+      tags: ["React", "Node.js", "Google Gemini API", "Tailwind CSS"],
+      githubUrl: "",
     }
   ];
 
@@ -50,6 +45,13 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-black text-green-500 pt-24 px-8 pb-8 font-mono"> {/* Added pt-24 for top padding */}
+      <Link 
+        href="/"
+        className="fixed top-6 left-6 z-50 p-3 rounded-full bg-green-500/10 hover:bg-green-500/20 transition-all duration-300"
+      >
+        <ArrowLeft className="w-6 h-6" />
+      </Link>
+
       <div className="max-w-4xl mx-auto">
         {/* Terminal Header */}
         <div className="border border-green-500 rounded-t-lg shadow-lg shadow-green-500/20"> {/* Added shadow effect */}
@@ -122,6 +124,8 @@ const Projects = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
 
       <style jsx global>{`
         @keyframes fadeIn {
